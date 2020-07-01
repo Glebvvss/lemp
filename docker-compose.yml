@@ -1,0 +1,27 @@
+version: "2"
+services:
+  nginx:
+    image: nginx:latest
+    container_name: lab-nginx
+    ports:
+      - 9000:80
+    volumes: 
+      - ./docker/nginx:/etc/nginx/conf.d
+      - ./src:/usr/share/nginx/html
+    links:
+      - php
+  php:
+    build: ./docker/php
+    container_name: lab-php
+    ports:
+      - 9001:9000
+    volumes: 
+      - ./src:/var/www/html
+    links:
+      - mysql
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
