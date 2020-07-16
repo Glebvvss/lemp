@@ -18,7 +18,11 @@ RUN apt-get update && apt-get install -y \
 # RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # # Install extensions
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl dom tikenizer
+#RUN docker-php-ext-install mbstring zip exif pcntl dom
+#RUN docker-php-ext-enable pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql && docker-php-ext-enable pdo_mysql
+#RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+
 # RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
 # RUN docker-php-ext-install gd
 
